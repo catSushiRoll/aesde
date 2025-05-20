@@ -39,8 +39,9 @@ int main(){
     int arr[n];
     cout << "Masukkan jumlah elemen yang akan disorting: ";
     cin >> n;
-    cout << "Masukkan elemen: ";
+    cout << "Masukkan elemen:\n";
     for (int i=0; i<n; i++){
+        cout << "masukkan elemen ke-"<< i+1 << " => ";
         cin>>val;
         arr[i]=val;
         root = insert(root, val);
