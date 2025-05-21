@@ -61,6 +61,6 @@ int main(){
     //execution time: stop
     auto diff = stop - start;
     std::chrono::duration<double>duration=(diff);
-    cout << "\nExecution time: " << duration.count() << " ms" << endl;
+    cout << "\nExecution time: " << duration.count() << "  s" << endl;
     return 0;
 }
