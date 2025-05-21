@@ -41,8 +41,6 @@ int main(){
     int arr[n];
     cout << "Masukkan elemen:\n";
 
-    //execution time: start
-    auto start = std::chrono::high_resolution_clock::now();
     for (int i=0; i<n; i++){
         cout << "masukkan elemen ke-"<< i+1 << " => ";
         cin>>val;
@@ -55,10 +53,12 @@ int main(){
     }
     cout << endl;
     cout << "Elemen yang sudah disorting: ";
+    //execution time: start
+    auto start = std::chrono::high_resolution_clock::now();
     inorder (root);
-
-    auto stop = std::chrono::high_resolution_clock::now();
+    
     //execution time: stop
+    auto stop = std::chrono::high_resolution_clock::now();
     auto diff = stop - start;
     std::chrono::duration<double>duration=(diff);
     cout << "\nExecution time: " << duration.count() << "  s" << endl;
