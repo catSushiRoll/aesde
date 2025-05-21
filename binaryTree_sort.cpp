@@ -1,5 +1,5 @@
-// #include <array>
 #include <iostream>
+#include <chrono>
 using namespace std;
 
 struct Node{
@@ -36,11 +36,15 @@ void inorder(Node* root){
 int main(){
     Node* root = NULL;
     int n, val;
-    int arr[n];
     cout << "Masukkan jumlah elemen yang akan disorting: ";
     cin >> n;
-    cout << "Masukkan elemen: ";
+    int arr[n];
+    cout << "Masukkan elemen:\n";
+
+    //execution time: start
+    auto start = std::chrono::high_resolution_clock::now();
     for (int i=0; i<n; i++){
+        cout << "masukkan elemen ke-"<< i+1 << " => ";
         cin>>val;
         arr[i]=val;
         root = insert(root, val);
@@ -52,5 +56,10 @@ int main(){
     cout << endl;
     cout << "Elemen yang sudah disorting: ";
     inorder (root);
+
+    auto stop = std::chrono::high_resolution_clock::now();
+    auto diff = stop - start;
+    std::chrono::duration<double>duration=(diff);
+    cout << "\nExecution time: " << duration.count() << " ms" << endl;
     return 0;
 }
