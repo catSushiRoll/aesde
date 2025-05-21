@@ -58,7 +58,7 @@ int main(){
     inorder (root);
 
     auto stop = std::chrono::high_resolution_clock::now();
-    //execution time: start
+    //execution time: stop
     auto diff = stop - start;
     std::chrono::duration<double>duration=(diff);
     cout << "\nExecution time: " << duration.count() << " ms" << endl;
