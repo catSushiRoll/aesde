@@ -73,21 +73,20 @@ int main() {
     // Clear adjacency
     for (int i = 0; i < n; i++) adjSize[i] = 0;
 
-    // adj[0] = {1, 2};
+
     adj[2][adjSize[2]++] = 1;
 
-    // adj[1] = {0, 2, 3};
     adj[1][adjSize[1]++] = 2;
     adj[1][adjSize[1]++] = 3;
     adj[1][adjSize[1]++] = 5;
-    // adj[2] = {0, 1};
+
     adj[3][adjSize[3]++] = 1;
     adj[3][adjSize[3]++] = 5;
-    // adj[3] = {1, 4};
+
     adj[5][adjSize[5]++] = 1;
     adj[5][adjSize[5]++] = 3;
     adj[5][adjSize[5]++] = 4;
-    // adj[4] = {3};
+
     adj[4][adjSize[4]++] = 5;
 
     findArticulationPoints(n);
