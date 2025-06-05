@@ -2,14 +2,15 @@
 using namespace std;
 
 const int MAX = 100;
-int adj[MAX][MAX];
-int adjSize[MAX];
-bool visited[MAX];
-int disc[MAX], low[MAX], parent[MAX];
-bool ap[MAX];
-int timeCounter = 0;
+int adj[MAX][MAX];     // Matriks adjacency: menyimpan tetangga tiap simpul
+int adjSize[MAX];      // Menyimpan jumlah tetangga per simpul (berapa kolom yang dipakai di baris adj[i])
+bool visited[MAX];     // Menandai apakah simpul sudah dikunjungi
+int disc[MAX], low[MAX]; // disc = waktu discovery, low = nilai low-link
+int parent[MAX];       // Menyimpan parent dari simpul dalam DFS tree
+bool ap[MAX];          // Menandai apakah simpul adalah articulation point
+int timeCounter = 0;   // Waktu global untuk pencatatan waktu penemuan simpul dalam DFS
 
-void DFS(int u, int n) {
+void DFS(int u) {
     visited[u] = true;
     disc[u] = low[u] = ++timeCounter;
     int children = 0;
@@ -19,15 +20,19 @@ void DFS(int u, int n) {
         if (!visited[v]) {
             children++;
             parent[v] = u;
-            DFS(v, n);
+            DFS(v);
 
             if (low[u] > low[v]) low[u] = low[v];
 
+            // u articulation point jika:
+            // 1. u adalah root dan punya 2 anak
             if (parent[u] == -1 && children > 1)
                 ap[u] = true;
+            // 2. u adalah articulation point jika low[v] >= disc[u]
             if (parent[u] != -1 && low[v] >= disc[u])
                 ap[u] = true;
         }
+        // v bukan anak dari u maka ada back edge
         else if (v != parent[u]) {
             if (low[u] > disc[v]) low[u] = disc[v];
         }
@@ -44,7 +49,7 @@ void findArticulationPoints(int n) {
 
     for (int i = 0; i < n; i++)
         if (!visited[i])
-            DFS(i, n);
+            DFS(i);
 
     cout << "Articulation Points: ";
     bool found = false;
@@ -69,10 +74,9 @@ void findArticulationPoints(int n) {
 */
 
 int main() {
-    int n = 5;
-    // Clear adjacency
-    for (int i = 0; i < n; i++) adjSize[i] = 0;
+    int n = 6;
 
+    for (int i = 0; i < n; i++) adjSize[i] = 0;
 
     adj[2][adjSize[2]++] = 1;
 
